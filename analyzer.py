@@ -1,14 +1,16 @@
+import re
 def read_log(filename):
     counts = {}
     with open(filename, "r") as f:
         for line in f:
             if "failed" in line:
-                parts = line.split()
-                ip = parts[-1].replace("ip=", "")
-                if ip in counts:
-                    counts[ip] += 1
-                else:
-                    counts[ip] = 1
+                match = re.search(r"\d+\.\d+\.\d+\.\d+", line)
+                if match:
+                    ip = match.group()
+                    if ip in counts:
+                        counts[ip] += 1
+                    else:
+                        counts[ip] = 1
     return counts
 def show_alerts(counts, limit):
     for ip, n in counts.items():

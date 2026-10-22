@@ -2,7 +2,7 @@ counts = {}
 filename = input("Log file name: ")
 while True:
     try:
-        limit = int(input("Alert after how many alert failures? "))
+        limit = int(input("Alert after how many failures? "))
         break
     except ValueError:
         print("please enter a number")
